@@ -77,6 +77,8 @@ public class UserMealsUtil {
                         false));
             }
 
+            caloriesPerDayMap.merge(userMealDate.toLocalDate(), meal.getCalories(), Integer::sum);
+
             mealWithExcessMap.values().forEach(entry -> {
                 if (caloriesPerDayMap.containsKey(entry.getDateTime().toLocalDate())) {
                     entry.setExcess(caloriesPerDayMap.get(entry.getDateTime().toLocalDate()) > caloriesPerDay);
