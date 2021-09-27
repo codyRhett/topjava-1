@@ -69,15 +69,15 @@ public class UserMealsUtil {
         Map<LocalDateTime, UserMealWithExcess> mealWithExcessMap = new HashMap<>();
 
         for(UserMeal meal : meals) {
-            LocalDateTime userMealDate = meal.getDateTime();
-            if (TimeUtil.isBetweenHalfOpen(userMealDate.toLocalTime(), startTime, endTime)) {
-                mealWithExcessMap.put(userMealDate, new UserMealWithExcess(meal.getDateTime(),
+            LocalDateTime userMealDateTime = meal.getDateTime();
+            if (TimeUtil.isBetweenHalfOpen(userMealDateTime.toLocalTime(), startTime, endTime)) {
+                mealWithExcessMap.put(userMealDateTime, new UserMealWithExcess(meal.getDateTime(),
                         meal.getDescription(),
                         meal.getCalories(),
                         false));
             }
 
-            caloriesPerDayMap.merge(userMealDate.toLocalDate(), meal.getCalories(), Integer::sum);
+            caloriesPerDayMap.merge(userMealDateTime.toLocalDate(), meal.getCalories(), Integer::sum);
 
             mealWithExcessMap.values().forEach(entry -> {
                 if (caloriesPerDayMap.containsKey(entry.getDateTime().toLocalDate())) {
