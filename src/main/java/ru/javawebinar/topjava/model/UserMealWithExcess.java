@@ -1,8 +1,7 @@
 package ru.javawebinar.topjava.model;
 
-import java.time.LocalDate;
+import ru.javawebinar.topjava.util.UserCalories;
 import java.time.LocalDateTime;
-import java.util.Map;
 
 public class UserMealWithExcess {
     private final LocalDateTime dateTime;
@@ -13,9 +12,15 @@ public class UserMealWithExcess {
 
     private final boolean excess;
 
-    private Map<LocalDate, Integer> caloriesPerDayMap;
+    private UserCalories userCalories;
 
-    private int maxDayCalories;
+    public UserMealWithExcess(LocalDateTime dateTime, String description, int calories, boolean excess, UserCalories userCalories) {
+        this.dateTime = dateTime;
+        this.description = description;
+        this.calories = calories;
+        this.excess = excess;
+        this.userCalories = userCalories;
+    }
 
     public UserMealWithExcess(LocalDateTime dateTime, String description, int calories, boolean excess) {
         this.dateTime = dateTime;
@@ -24,24 +29,12 @@ public class UserMealWithExcess {
         this.excess = excess;
     }
 
-    public void setCaloriesPerDayMap(Map<LocalDate, Integer> caloriesPerDayMap) {
-        this.caloriesPerDayMap = caloriesPerDayMap;
-    }
-
-    public boolean setExcess() {
-        if (caloriesPerDayMap == null) {
+    public boolean isExcess() {
+        if (userCalories == null) {
             return excess;
         } else {
-            return caloriesPerDayMap.get(dateTime.toLocalDate()) > maxDayCalories;
+            return userCalories.getCaloriesPerDay(dateTime.toLocalDate()) > userCalories.getMaxDayCalories();
         }
-    }
-
-    public void setMaxDayCalories(int maxDayCalories) {
-        this.maxDayCalories = maxDayCalories;
-    }
-
-    public LocalDateTime getDateTime() {
-        return dateTime;
     }
 
     @Override
@@ -50,7 +43,7 @@ public class UserMealWithExcess {
                 "dateTime=" + dateTime +
                 ", description='" + description + '\'' +
                 ", calories=" + calories +
-                ", excess=" + setExcess() +
+                ", excess=" + isExcess() +
                 '}';
     }
 }
