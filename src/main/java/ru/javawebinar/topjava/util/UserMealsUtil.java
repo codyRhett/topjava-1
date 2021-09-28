@@ -3,7 +3,6 @@ package ru.javawebinar.topjava.util;
 import ru.javawebinar.topjava.model.UserMeal;
 import ru.javawebinar.topjava.model.UserMealWithExcess;
 
-import java.lang.reflect.Array;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.LocalTime;
@@ -85,14 +84,15 @@ public class UserMealsUtil {
         Map<LocalDate, Integer> caloriesPerDayMap = new HashMap<>();
 
         return meals.stream()
-            .collect(Collectors.groupingBy(userMeal -> {
-                caloriesPerDayMap.merge(userMeal.getDateTime().toLocalDate(), userMeal.getCalories(), Integer::sum);
-                return userMeal.getDateTime().toLocalDate();}))
-            .values().stream()
-            .flatMap(userMeals -> userMeals.stream()
-                    .filter(userMeal -> TimeUtil.isBetweenHalfOpen(userMeal.getDateTime().toLocalTime(), startTime, endTime))
-                    .map(userMeal -> new UserMealWithExcess(userMeal.getDateTime(), userMeal.getDescription(), userMeal.getCalories(),
-                            caloriesPerDayMap.get(userMeal.getDateTime().toLocalDate()) > caloriesPerDay)))
-             .collect(Collectors.toList());
+                .collect(Collectors.groupingBy(userMeal -> {
+                    caloriesPerDayMap.merge(userMeal.getDateTime().toLocalDate(), userMeal.getCalories(), Integer::sum);
+                    return userMeal.getDateTime().toLocalDate();
+                }))
+                .values().stream()
+                .flatMap(userMeals -> userMeals.stream()
+                        .filter(userMeal -> TimeUtil.isBetweenHalfOpen(userMeal.getDateTime().toLocalTime(), startTime, endTime))
+                        .map(userMeal -> new UserMealWithExcess(userMeal.getDateTime(), userMeal.getDescription(), userMeal.getCalories(),
+                                caloriesPerDayMap.get(userMeal.getDateTime().toLocalDate()) > caloriesPerDay)))
+                .collect(Collectors.toList());
     }
 }
