@@ -73,9 +73,8 @@ public class UserMealsUtil {
             LocalDateTime userMealDateTime = meal.getDateTime();
             caloriesPerDayMap.merge(userMealDateTime.toLocalDate(), meal.getCalories(), Integer::sum);
             if (TimeUtil.isBetweenHalfOpen(userMealDateTime.toLocalTime(), startTime, endTime)) {
-                UserMealWithExcess userMealWithExcess = new UserMealWithExcess(userMealDateTime, meal.getDescription(),
-                        meal.getCalories(), userCalories);
-                mealsWithExcesses.add(userMealWithExcess);
+                mealsWithExcesses.add(new UserMealWithExcess(userMealDateTime, meal.getDescription(),
+                        meal.getCalories(), userCalories));
             }
         }
         return mealsWithExcesses;
