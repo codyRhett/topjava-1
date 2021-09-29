@@ -1,4 +1,4 @@
-package ru.javawebinar.topjava.util;
+package ru.javawebinar.topjava.model;
 
 import java.time.LocalDate;
 import java.util.Map;

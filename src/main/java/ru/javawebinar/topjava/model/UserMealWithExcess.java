@@ -1,6 +1,5 @@
 package ru.javawebinar.topjava.model;
 
-import ru.javawebinar.topjava.util.UserCalories;
 import java.time.LocalDateTime;
 
 public class UserMealWithExcess {
@@ -10,20 +9,15 @@ public class UserMealWithExcess {
 
     private final int calories;
 
-    private final boolean excess;
+    private boolean excess;
 
     private UserCalories userCalories;
 
-    public UserMealWithExcess(LocalDateTime dateTime, String description, int calories, boolean excess, UserCalories userCalories) {
+    public UserMealWithExcess(LocalDateTime dateTime, String description, int calories, UserCalories userCalories) {
         this.dateTime = dateTime;
         this.description = description;
         this.calories = calories;
-        this.excess = excess;
         this.userCalories = userCalories;
-    }
-
-    public LocalDateTime getDateTime() {
-        return dateTime;
     }
 
     public UserMealWithExcess(LocalDateTime dateTime, String description, int calories, boolean excess) {
