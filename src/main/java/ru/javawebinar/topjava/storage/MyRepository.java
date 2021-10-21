@@ -7,7 +7,7 @@ import java.util.List;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.ConcurrentMap;
 
-public class MyStorage implements Storage{
+public class MyRepository implements Repository {
     protected final ConcurrentMap<String, Meal> mapMealStorage = new ConcurrentHashMap<>();
 
     @Override

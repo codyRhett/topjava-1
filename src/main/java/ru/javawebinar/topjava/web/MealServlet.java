@@ -3,7 +3,7 @@ package ru.javawebinar.topjava.web;
 import org.slf4j.Logger;
 import ru.javawebinar.topjava.MealTestData;
 import ru.javawebinar.topjava.model.Meal;
-import ru.javawebinar.topjava.storage.MyStorage;
+import ru.javawebinar.topjava.storage.MyRepository;
 import ru.javawebinar.topjava.util.MealsUtil;
 
 import javax.servlet.ServletException;
@@ -22,14 +22,14 @@ import static org.slf4j.LoggerFactory.getLogger;
 public class MealServlet extends HttpServlet {
     private static final Logger log = getLogger(UserServlet.class);
 
-    MyStorage myStorage;
+    MyRepository myRepository;
 
     @Override
     public void init() {
-        myStorage = new MyStorage();
+        myRepository = new MyRepository();
         List<Meal> meal = MealTestData.createMealsList();
         meal.forEach(mealTo -> {
-            myStorage.save(mealTo);
+            myRepository.save(mealTo);
         });
     }
 
@@ -42,7 +42,7 @@ public class MealServlet extends HttpServlet {
         String calories = request.getParameter("Calories");
 
         Meal meal = new Meal(LocalDateTime.parse(dateTime), description, Integer.parseInt(calories), uuid);
-        myStorage.update(meal);
+        myRepository.update(meal);
         response.sendRedirect("meals");
     }
 
@@ -54,22 +54,22 @@ public class MealServlet extends HttpServlet {
         log.debug("redirect to users");
 
         if (action == null) {
-            request.setAttribute("meals", MealsUtil.filteredByStreams(myStorage.getAll(), LocalTime.of(7, 0), LocalTime.of(23, 0), MealTestData.MAX_CALORIESPERDAY));
+            request.setAttribute("meals", MealsUtil.filteredByStreams(myRepository.getAll(), LocalTime.of(7, 0), LocalTime.of(23, 0), MealTestData.MAX_CALORIESPERDAY));
             request.getRequestDispatcher("/meals.jsp").forward(request, response);
             return;
         }
 
         switch (action) {
             case "delete":
-                myStorage.delete(uuid);
+                myRepository.delete(uuid);
                 response.sendRedirect("meals");
                 return;
             case "edit":
-                meal = myStorage.get(uuid);
+                meal = myRepository.get(uuid);
                 break;
             case "add":
                 meal = new Meal(LocalDateTime.of(2020, Month.JANUARY, 30, 10, 0), "Завтрак", 500, UUID.randomUUID().toString());
-                myStorage.save(meal);
+                myRepository.save(meal);
                 break;
             default:
                 throw new IllegalStateException("Action " + action + " is illegal");
