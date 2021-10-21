@@ -1,0 +1,16 @@
+dl{
+    margin: 0 0 20px 0;
+    overflow: hidden;
+}
+dt {
+    margin: 0;
+    padding: 5px 0;
+    width: 150px;
+    float: left;
+    clear: both;
+    color: #808d9a;
+}
+dd {
+    margin: 0 0 0 150px;
+    padding: 5px 0;
+}

@@ -12,6 +12,9 @@
 <hr>
 <h2>Meals</h2>
 <section>
+    <a href="meals?action=add">add Meal</a>
+    <br>
+    <br>
     <table border="1">
         <tr>
             <th>Date</th>
@@ -33,8 +36,8 @@
                 <td>${meal.date} ${meal.time}</td>
                 <td>${meal.description}</td>
                 <td>${meal.calories}</td>
-                <td><a href="">update</a></td>
-                <td><a href="">delete</a></td>
+            <td><a href="meals?uuid=${meal.uuid}&action=edit">update</a></td>
+            <td><a href="meals?uuid=${meal.uuid}&action=delete">delete</a></td>
             </tr>
         </c:forEach>
     </table>

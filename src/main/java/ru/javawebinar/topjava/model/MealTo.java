@@ -13,11 +13,18 @@ public class MealTo {
 
     private final boolean excess;
 
-    public MealTo(LocalDateTime dateTime, String description, int calories, boolean excess) {
+    private final String uuid;
+
+    public MealTo(LocalDateTime dateTime, String description, int calories, boolean excess, String uuid) {
         this.dateTime = dateTime;
         this.description = description;
         this.calories = calories;
         this.excess = excess;
+        this.uuid = uuid;
+    }
+
+    public String getUuid() {
+        return uuid;
     }
 
     public LocalDate getDate() {
