@@ -5,27 +5,32 @@ import java.time.LocalDateTime;
 import java.time.LocalTime;
 
 public class Meal {
+    private int id;
     private LocalDateTime dateTime;
-
     private String description;
-
     private int calories;
 
-    private String uuid;
+    public Meal() {}
 
-    public Meal(LocalDateTime dateTime, String description, int calories, String uuid) {
+    public Meal(LocalDateTime dateTime, String description, int calories) {
         this.dateTime = dateTime;
         this.description = description;
         this.calories = calories;
-        this.uuid = uuid;
     }
 
-    public Meal() {
-
+    public Meal(LocalDateTime dateTime, String description, int calories, int id) {
+        this.dateTime = dateTime;
+        this.description = description;
+        this.calories = calories;
+        this.id = id;
     }
 
-    public String getUuid() {
-        return uuid;
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
     }
 
     public LocalDateTime getDateTime() {

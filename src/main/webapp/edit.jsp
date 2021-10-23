@@ -13,7 +13,7 @@
 <h2>Edit meal</h2>
 <section>
     <form method="post" action="meals" enctype="application/x-www-form-urlencoded">
-            <input type="hidden" name="uuid" size=30 value="${meal.uuid}">
+            <input type="hidden" name="id" size=30 value="${meal.id}">
             <dl>
                 <dt style="float: left">DataTime:</dt>
                 <dd><input type="datetime-local" name="Datetime" size=30 value="${meal.dateTime}"></dd>

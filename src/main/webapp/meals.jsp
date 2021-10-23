@@ -30,8 +30,8 @@
                 <td>${meal.date} ${meal.time}</td>
                 <td>${meal.description}</td>
                 <td>${meal.calories}</td>
-            <td><a href="meals?uuid=${meal.uuid}&action=edit">update</a></td>
-            <td><a href="meals?uuid=${meal.uuid}&action=delete">delete</a></td>
+            <td><a href="meals?id=${meal.id}&action=edit">update</a></td>
+            <td><a href="meals?id=${meal.id}&action=delete">delete</a></td>
             </tr>
         </c:forEach>
     </table>
