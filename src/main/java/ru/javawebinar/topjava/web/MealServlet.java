@@ -2,7 +2,7 @@ package ru.javawebinar.topjava.web;
 
 import org.slf4j.Logger;
 import ru.javawebinar.topjava.model.Meal;
-import ru.javawebinar.topjava.repositories.MealMapRepository;
+import ru.javawebinar.topjava.repository.MealMapRepository;
 import ru.javawebinar.topjava.util.MealsUtil;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
@@ -34,10 +34,12 @@ public class MealServlet extends HttpServlet {
         String description = request.getParameter("Description");
         String calories = request.getParameter("Calories");
 
-        Meal meal = new Meal(LocalDateTime.parse(dateTime), description, Integer.parseInt(calories));
+        Meal meal;
         if (Objects.equals(id, "0")) {
+            meal = new Meal(LocalDateTime.parse(dateTime), description, Integer.parseInt(calories));
             mealMapRepository.save(meal);
         } else {
+            meal = new Meal(LocalDateTime.parse(dateTime), description, Integer.parseInt(calories), Integer.parseInt(id));
             mealMapRepository.update(meal);
         }
         response.sendRedirect("meals");
@@ -48,7 +50,7 @@ public class MealServlet extends HttpServlet {
         String action = request.getParameter("action");
         log.debug("redirect to users");
         if (action == null) {
-            request.setAttribute("meals", MealsUtil.filteredByCalories(mealMapRepository.getAll(), MealsUtil.MAX_CALORIESPERDAY));
+            request.setAttribute("meals", MealsUtil.filteredByCalories(mealMapRepository.getAll(), MealsUtil.MAX_CALORIES_PER_DAY));
             request.getRequestDispatcher("/meals.jsp").forward(request, response);
             return;
         }

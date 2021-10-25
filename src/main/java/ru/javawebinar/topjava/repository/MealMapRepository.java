@@ -1,14 +1,15 @@
-package ru.javawebinar.topjava.repositories;
+package ru.javawebinar.topjava.repository;
 
 import ru.javawebinar.topjava.model.Meal;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.ConcurrentMap;
+import java.util.concurrent.atomic.AtomicInteger;
 
 public class MealMapRepository implements Repository {
     protected final ConcurrentMap<Integer, Meal> mapMealStorage = new ConcurrentHashMap<>();
-    private static int idCounter = 0;
+    AtomicInteger atomicInt = new AtomicInteger(0);
 
     @Override
     public void update(Meal meal) {
@@ -36,7 +37,7 @@ public class MealMapRepository implements Repository {
         return new ArrayList<>(mapMealStorage.values());
     }
 
-    private static synchronized int createID() {
-        return ++idCounter;
+    private int createID() {
+        return atomicInt.incrementAndGet();
     }
 }
