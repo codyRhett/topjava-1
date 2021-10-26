@@ -17,7 +17,7 @@ import static org.slf4j.LoggerFactory.getLogger;
 
 public class MealServlet extends HttpServlet {
     private static final Logger log = getLogger(UserServlet.class);
-    MealMapRepository mealMapRepository;
+    private MealMapRepository mealMapRepository;
 
     @Override
     public void init() {

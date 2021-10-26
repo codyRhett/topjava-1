@@ -9,7 +9,7 @@ import java.util.concurrent.atomic.AtomicInteger;
 
 public class MealMapRepository implements Repository {
     protected final ConcurrentMap<Integer, Meal> mapMealStorage = new ConcurrentHashMap<>();
-    AtomicInteger atomicInt = new AtomicInteger(0);
+    private AtomicInteger atomicInt = new AtomicInteger(0);
 
     @Override
     public void update(Meal meal) {
