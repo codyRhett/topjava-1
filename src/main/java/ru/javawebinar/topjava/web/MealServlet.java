@@ -88,7 +88,7 @@ public class MealServlet extends HttpServlet {
             default:
                 log.info("getAll");
                 request.setAttribute("meals",
-                        MealsUtil.getTos(mealRestController.getAll(), MealsUtil.DEFAULT_CALORIES_PER_DAY));
+                        mealRestController.getAllMealTo());
                 request.getRequestDispatcher("/meals.jsp").forward(request, response);
                 break;
         }
