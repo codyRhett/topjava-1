@@ -31,6 +31,9 @@ public class InMemoryUserRepository implements UserRepository {
     @Override
     public User save(User user) {
         log.info("save {}", user);
+        if (user.getId() == null) {
+            return null;
+        }
         if (!repository.containsKey(user.getId())) {
             repository.put(user.getId(), user);
         } else {
