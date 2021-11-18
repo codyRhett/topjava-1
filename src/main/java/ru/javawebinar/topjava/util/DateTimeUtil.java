@@ -2,7 +2,6 @@ package ru.javawebinar.topjava.util;
 
 import java.time.LocalDateTime;
 import java.time.LocalTime;
-import java.time.chrono.ChronoLocalDateTime;
 import java.time.format.DateTimeFormatter;
 
 public class DateTimeUtil {
@@ -13,7 +12,8 @@ public class DateTimeUtil {
     }
 
     public static boolean isBetweenHalfOpenByDateTime(LocalDateTime lt, LocalDateTime startDateTime, LocalDateTime endDateTime) {
-        return lt.compareTo(startDateTime) >= 0 && lt.compareTo(endDateTime) < 0;
+        return (lt.toLocalDate().compareTo(startDateTime.toLocalDate()) >= 0 && lt.toLocalDate().compareTo(endDateTime.toLocalDate()) <= 0) &
+                (lt.toLocalTime().compareTo(startDateTime.toLocalTime()) >= 0 && lt.toLocalTime().compareTo(endDateTime.toLocalTime()) < 0);
     }
 
     public static String toString(LocalDateTime ldt) {
